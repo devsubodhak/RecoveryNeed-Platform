@@ -1,0 +1,7 @@
+{
+  "name": "Recovery Needs Tracker",
+  "description": "A platform for collecting post-disaster damage data to estimate resources required for recovery and restoration efforts.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
