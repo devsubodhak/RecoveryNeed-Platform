@@ -3,38 +3,12 @@ import { DisasterMap } from './components/DisasterMap';
 import { StatsDashboard } from './components/StatsDashboard';
 import { ReportForm } from './components/ReportForm';
 import { EmergencyPage } from './components/EmergencyPage';
-import { DamageReport, DamageType, BusinessSize, VehicleType, Language } from './types';
+import { DamageReport, Language } from './types';
 import { Map, PieChart, Activity, Phone } from 'lucide-react';
 import { translations } from './translations';
 
-// Mock Initial Data
-const INITIAL_REPORTS: DamageReport[] = [
-  {
-    id: '1', lat: 6.9271, lng: 79.8612, type: DamageType.HOME, timestamp: Date.now(), 
-    homeDetails: { residents: 4, damagePercentage: 80, memberAges: [45, 42, 12, 8] },
-    description: "Roof collapsed due to landslide."
-  },
-  {
-    id: '2', lat: 6.9320, lng: 79.8550, type: DamageType.BUSINESS, timestamp: Date.now(), 
-    businessDetails: { size: BusinessSize.MEDIUM, damagePercentage: 100 },
-    description: "Grocery store flooded completely."
-  },
-  {
-    id: '3', lat: 6.9100, lng: 79.8800, type: DamageType.VEHICLE, timestamp: Date.now(),
-    vehicleDetails: { type: VehicleType.VAN, count: 2 },
-    description: "Delivery vans washed away."
-  },
-  {
-    id: '4', lat: 6.9350, lng: 79.8600, type: DamageType.HOME, timestamp: Date.now(),
-    homeDetails: { residents: 2, damagePercentage: 40, memberAges: [70, 68] },
-    description: "Water entered the living room."
-  },
-  {
-    id: '5', lat: 6.9200, lng: 79.8700, type: DamageType.BUSINESS, timestamp: Date.now(),
-    businessDetails: { size: BusinessSize.SMALL, damagePercentage: 75 },
-    description: "Small textitle shop damaged."
-  }
-];
+// Initial Data - Empty for production/deployment
+const INITIAL_REPORTS: DamageReport[] = [];
 
 type ViewState = 'report' | 'dashboard' | 'emergency';
 
@@ -200,11 +174,11 @@ const App: React.FC = () => {
                             <div key={r.id} className="bg-white p-4 rounded-lg border border-slate-200 hover:border-blue-300 transition-colors">
                               <div className="flex justify-between items-start mb-2">
                                 <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide border ${
-                                  r.type === DamageType.HOME ? 'bg-orange-50 text-orange-600 border-orange-100' :
-                                  r.type === DamageType.BUSINESS ? 'bg-blue-50 text-blue-600 border-blue-100' :
+                                  r.type === 'HOME' ? 'bg-orange-50 text-orange-600 border-orange-100' :
+                                  r.type === 'BUSINESS' ? 'bg-blue-50 text-blue-600 border-blue-100' :
                                   'bg-red-50 text-red-600 border-red-100'
                                 }`}>
-                                  {r.type === DamageType.HOME ? t.home : r.type === DamageType.BUSINESS ? t.business : t.vehicle}
+                                  {r.type === 'HOME' ? t.home : r.type === 'BUSINESS' ? t.business : t.vehicle}
                                 </span>
                                 <span className="text-xs text-slate-400">{new Date(r.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
                               </div>
@@ -214,6 +188,11 @@ const App: React.FC = () => {
                               )}
                             </div>
                           ))}
+                          {reports.length === 0 && (
+                            <div className="col-span-1 md:col-span-2 text-center py-8 text-slate-400 italic bg-slate-50 rounded-lg border border-dashed border-slate-200">
+                              No reports submitted yet.
+                            </div>
+                          )}
                       </div>
                     </div>
                 </div>
