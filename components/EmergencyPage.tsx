@@ -36,8 +36,8 @@ export const EmergencyPage: React.FC<EmergencyPageProps> = ({ lang }) => {
       text: 'text-white'
     },
     {
-      id: '108',
-      number: '108',
+      id: '1990',
+      number: '1990',
       title: t.ambulance,
       icon: Ambulance,
       bg: 'bg-green-500', // Using green as per common standards or the image reference
